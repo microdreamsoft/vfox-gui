@@ -207,8 +207,6 @@ func createInstallTab(mgr *vfox.Manager, win fyne.Window) *fyne.Container {
 
 	searchEntry := widget.NewEntry()
 	searchEntry.SetPlaceHolder("SDK name (nodejs, golang, python...)")
-	searchEntryScroll := container.NewScroll(searchEntry)
-	searchEntryScroll.SetMinSize(fyne.NewSize(500, 0))
 
 	searchBtn := widget.NewButton("Search", func() {
 		name := strings.TrimSpace(searchEntry.Text)
@@ -252,7 +250,7 @@ func createInstallTab(mgr *vfox.Manager, win fyne.Window) *fyne.Container {
 		runAsync(output.label, func() (string, error) { return mgr.Info(sdk) })
 	})
 
-	searchRow := container.NewHBox(widget.NewLabel("Search:"), searchEntry, searchBtn)
+	searchRow := container.NewBorder(nil, nil, widget.NewLabel("Search:"), searchBtn, searchEntry)
 	installRow := container.NewBorder(nil, nil, widget.NewLabel("Install:"), installBtn, installEntry)
 	infoRow := container.NewBorder(nil, nil, widget.NewLabel("Info:"), infoBtn, infoEntry)
 
