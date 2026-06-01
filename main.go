@@ -69,11 +69,11 @@ func runAsync(output *widget.Label, fn func() (string, error)) {
 		out, err := fn()
 		out = stripANSI(out)
 		fyne.Do(func() {
+			showTxt := ""
 			if err != nil {
-				output.SetText(fmt.Sprintf("Error: %v", err))
-				return
+				showTxt = fmt.Sprintf("Error: %v", err)
 			}
-			output.SetText(out)
+			output.SetText(showTxt + "\n" + out)
 		})
 	}()
 }
